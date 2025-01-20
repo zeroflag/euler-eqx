@@ -1,3 +1,4 @@
+\ https://projecteuler.net/problem=8
 alias: sub #( string.sub 3 1 )
 alias: LENGTH 13
 

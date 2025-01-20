@@ -1,0 +1,25 @@
+\ https://projecteuler.net/problem=9
+alias: sqrt #( math.sqrt 1 1 )
+alias: modf #( math.modf 1 -1 )
+
+: square ( n --n ) dup * ;
+: intpart ( n -- n ) modf drop ;
+: square? ( n -- bool ) sqrt dup intpart = ;
+
+: problem9 ( -- n )
+  1 999 to: a
+    a 1 + 1000 to: b
+      a square b square +
+      dup square? if
+        sqrt -> var c
+        a b c + + 1000 = if
+          a b c * *
+          exit
+        then
+      else
+        drop ( c^2 )
+      then
+    end
+  end ;
+
+31875000 problem9 =assert
