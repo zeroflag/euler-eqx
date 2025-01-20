@@ -1,0 +1,23 @@
+\ https://projecteuler.net/problem=4
+
+alias: reverse #( string.reverse 1 )
+
+: palindrom? ( n -- bool ) >str dup reverse = ;
+
+: array-max ( [] --n )
+  dup 1 @ ( max )
+  swap ipairs: i each
+    dup each < if drop each then
+  end ;
+
+: palindroms ( -- [] )
+  []
+  1000 1 do
+    1000 1 do
+      i j * palindrom? if
+        dup i j * append
+      then
+    loop
+  loop ;
+
+: problem4 palindroms array-max ;

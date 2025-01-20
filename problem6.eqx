@@ -1,0 +1,18 @@
+\ https://projecteuler.net/problem=6
+
+: sq dup * ;
+
+: sum-of-squares ( n -- n )
+  0 ( sum )
+  swap 1 + 0 do
+    i sq +
+  loop ;
+
+: square-of-sum ( n -- n )
+  0 ( sum )
+  swap 1 + 0 do
+    i +
+  loop
+  sq ;
+
+: problem6 100 square-of-sum 100 sum-of-squares - ;

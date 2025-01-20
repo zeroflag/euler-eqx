@@ -1,0 +1,25 @@
+\ https://projecteuler.net/problem=3
+
+alias: sqrt #( math.sqrt 1 )
+alias: ceil #( math.ceil 1 )
+
+: prime? ( n -- bool )
+  dup sqrt ceil 2 do
+    dup i % 0 = if drop false exit then
+  loop
+  drop true ;
+
+: prime-factors ( n -- n )
+  []
+  over sqrt ceil 2 do
+    over i % 0 = if
+      i prime? if
+        dup i append
+      then
+    then
+  loop
+  nip ;
+
+: last ( [] -- e ) dup # @ ;
+
+: problem3 ( -- n ) 600851475143 prime-factors last ;

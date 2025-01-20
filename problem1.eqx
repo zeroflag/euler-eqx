@@ -1,0 +1,12 @@
+\ https://projecteuler.net/problem=1
+
+: div3? ( n -- bool ) 3 % 0 = ;
+: div5? ( n -- bool ) 5 % 0 = ;
+
+: div3|5? ( n -- bool ) dup div3? swap div5? or ;
+
+: problem1
+  0 ( sum )
+  1000 1 do
+    i div3|5? if i + then
+  loop ;

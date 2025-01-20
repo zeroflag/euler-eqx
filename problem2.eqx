@@ -1,0 +1,16 @@
+\ https://projecteuler.net/problem=2
+
+: even? ( n -- bool ) 2 % 0 = ;
+: next ( n1 n2 -- n2 n3 ) 2dup + rot drop ;
+
+: problem2
+  0 -> var sum
+  1 1
+  begin
+    dup 4000000 <
+  while
+    dup even? if dup sum + -> sum then
+    next
+  repeat
+  drop drop
+  sum ;
