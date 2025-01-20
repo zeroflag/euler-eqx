@@ -1,0 +1,18 @@
+\ https://projecteuler.net/problem=10
+
+alias: sqrt #( math.sqrt 1 1 )
+alias: ceil #( math.ceil 1 1 )
+
+: prime? ( n -- bool )
+  dup sqrt ceil 1 + 2 do
+    dup i % 0 = if drop false exit then
+  loop
+  drop true ;
+
+: problem10 ( -- n )
+  2 ( sum )
+  3 2000000 2 step: i
+    i prime? if i + then
+  end ;
+
+142913828922 problem10 =assert
