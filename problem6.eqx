@@ -1,11 +1,11 @@
 \ https://projecteuler.net/problem=6
 
-: sq dup * ;
+: square ( n -- n ) dup * ;
 
 : sum-of-squares ( n -- n )
   0 ( sum )
   swap 1 + 0 do
-    i sq +
+    i square +
   loop ;
 
 : square-of-sum ( n -- n )
@@ -13,6 +13,10 @@
   swap 1 + 0 do
     i +
   loop
-  sq ;
+  square ;
 
-: problem6 100 square-of-sum 100 sum-of-squares - ;
+: problem6 ( -- n )
+  100 square-of-sum
+  100 sum-of-squares - ;
+
+25164150 problem6 =assert

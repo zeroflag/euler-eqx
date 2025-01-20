@@ -1,11 +1,17 @@
 \ https://projecteuler.net/problem=5
 
-: divisible? ( num limit -- bool )
+: evenly-divisible? ( n limit -- bool )
   1 + 2 do
     dup i % 0 != if drop false exit then
   loop
   drop true ;
 
 : problem5 ( -- n )
-  2520 begin dup 20 divisible? not while 20 + repeat ;
+  2520
+  begin
+    dup 20 evenly-divisible? not
+  while
+    20 +
+  repeat ;
 
+232792560 problem5 =assert

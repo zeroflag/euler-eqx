@@ -1,0 +1,34 @@
+\ https://projecteuler.net/problem=7
+var result
+
+alias: nth 10001
+alias: sqrt #( math.sqrt 1 )
+alias: ceil #( math.ceil 1 )
+
+: prime? ( n -- bool )
+  dup 2 = if drop true exit then
+  dup sqrt ceil 1 + 2 do
+    dup i % 0 = if
+      drop false exit
+    then
+  loop
+  drop true ;
+
+: reset [] -> result ;
+
+: primes ( limit -- )
+  2
+  begin
+    over result # >
+  while
+    dup prime? if
+      result over append
+    then
+    1 +
+  repeat
+  drop drop ;
+
+: problem7 ( -- n )
+  reset nth primes result nth @ ;
+
+104743 problem7 =assert

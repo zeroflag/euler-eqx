@@ -4,7 +4,7 @@ alias: reverse #( string.reverse 1 )
 
 : palindrom? ( n -- bool ) >str dup reverse = ;
 
-: array-max ( [] --n )
+: maximum ( [] --n )
   dup 1 @ ( max )
   swap ipairs: i each
     dup each < if drop each then
@@ -20,4 +20,6 @@ alias: reverse #( string.reverse 1 )
     loop
   loop ;
 
-: problem4 palindroms array-max ;
+: problem4 palindroms maximum ;
+
+906609 problem4 =assert

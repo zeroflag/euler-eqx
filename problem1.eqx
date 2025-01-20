@@ -5,8 +5,10 @@
 
 : div3|5? ( n -- bool ) dup div3? swap div5? or ;
 
-: problem1
+: problem1 ( -- n )
   0 ( sum )
   1000 1 do
     i div3|5? if i + then
   loop ;
+
+233168 problem1 =assert
