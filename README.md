@@ -1,2 +1,2 @@
 # euler-eqx
-Project Euler Problems in Equinox Forth
+[Project Euler Problems](https://projecteuler.net/archives) in [Equinox Forth](https://github.com/zeroflag/equinox)
