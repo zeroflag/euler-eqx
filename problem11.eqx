@@ -24,15 +24,13 @@
 
 [] -> var results
 
-: fetch ( pos -- n )
-  -> var pos
-  grid pos.y @ if
-    grid pos.y @ pos.x @ if
-      grid pos.y @ pos.x @
-      exit
-    then
+: fetch -> var pos ( n )
+  grid pos.y @ dup not if
+    drop 1 exit
   then
-  1 ;
+  pos.x @ dup not if
+    drop 1 exit
+  then ;
 
 : advance -> var pos
   pos.x pos.dx + -> pos.x
