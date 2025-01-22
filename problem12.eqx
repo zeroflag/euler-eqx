@@ -1,0 +1,23 @@
+\ https://projecteuler.net/problem=12
+alias: floor #( math.floor 1 1 )
+alias: sqrt #( math.sqrt 1 1 )
+
+: numdivs ( n -- n )
+  2 ( result )
+  over sqrt floor 1 +
+  2 do
+    over i % 0 = if
+      2 +
+      over i i * = if 1 - then
+    then
+  loop
+  nip ;
+
+: problem12
+  0
+  math.huge 1 do
+    i +
+    dup numdivs 500 > if exit then
+  loop ;
+
+problem12 76576500 =assert
