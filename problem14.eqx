@@ -1,0 +1,37 @@
+\ https://projecteuler.net/problem=14
+
+: next  ( n -- n )
+  dup 2 % 0 = if
+    2 /
+  else
+    3 * 1 +
+  then ;
+
+: seq ( n -- [] )
+  [ dup ] swap
+  begin
+    dup 1 >
+  while
+    next 2dup append
+  repeat
+  drop ;
+
+var result
+
+: longest ( -- )
+  1000000 500000 do
+    i seq
+    dup # result.len > if
+      dup # -> result.len
+      1 @   -> result.first
+    else
+      drop
+    then
+  loop ;
+
+: problem14 ( -- n )
+  { $len 1  $first 1 } -> result
+  longest
+  result.first ;
+
+problem14 837799 =assert
