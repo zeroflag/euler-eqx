@@ -1,0 +1,33 @@
+\ https://projecteuler.net/problem=16
+
+alias: floor #( math.floor 1 1 )
+
+[ 1 ] -> var digits
+  0   -> var carry
+
+: div ( n n -- n ) / floor ;
+: /10 ( n -- n ) 10 div ;
+
+: multiply-by-2 ( -- )
+  0 -> carry
+  digits # 1 + 1 do
+    digits i @ 2 * carry +
+    dup 10 < if
+      digits i rot !
+      0 -> carry
+    else
+      dup /10 -> carry
+      digits i rot 10 % !
+    then
+  loop
+  carry 0 != if
+    digits carry append
+  then ;
+
+: sum ( [] -- n ) 0 swap ipairs: _ each each + end ;
+
+: problem16 ( n -- n )
+  1000 0 do multiply-by-2 loop
+  digits sum ;
+
+1366 problem16 =assert
