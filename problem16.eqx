@@ -26,7 +26,7 @@ alias: floor #( math.floor 1 1 )
 
 : sum ( [] -- n ) 0 swap ipairs: _ each each + end ;
 
-: problem16 ( n -- n )
+: problem16 ( -- n )
   1000 0 do multiply-by-2 loop
   digits sum ;
 
