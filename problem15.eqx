@@ -1,0 +1,24 @@
+\ https://projecteuler.net/problem=15
+
+alias: grid 20
+
+: factorial ( n -- n! ) recursive
+  dup 2 > if dup 1 - factorial * then ;
+
+\ Each route has the same size (2*20 = 40)
+\ Therefore, we always need 40 steps to reach finish
+\ by increasing x / y.
+\ Which of these 40 are the 20 increases in x / y?
+\ It's the same as how many different ways
+\ can we pick 20 out of 40?
+\
+\ N!/((N-R)! * R!))
+
+: problem15 ( -- n )
+  grid 2 * -> var n
+  grid     -> var r
+  n     factorial
+  n r - factorial
+  r     factorial * / ;
+
+137846528820 problem15 =assert
