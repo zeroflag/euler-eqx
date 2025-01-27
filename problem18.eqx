@@ -27,7 +27,7 @@ alias: floor #( math.floor 1 1 )
 : at    ( i -- e ) tree swap 1 + @ ;
 
 : traverse ( i -- n ) recursive
-  dup at nil != if
+  dup at if
     dup  at
     over left  traverse
     rot  right traverse
