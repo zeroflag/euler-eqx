@@ -1,0 +1,37 @@
+\ https://projecteuler.net/problem=17
+
+alias: floor #( math.floor 1 1 )
+alias: gsub #( string.gsub 3 )
+
+: strip ( s -- s )
+  " "  "" gsub drop
+  "%-" "" gsub drop ;
+
+[ "one" "two" "three" "four" "five" "six" "seven" "eight" "nine" "ten" "eleven" "twelve" "thirteen" "fourteen" "fifteen" "sixteen" "seventeen" "eighteen" "nineteen" "twenty" ] -> var 1-20
+[ "ten" "twenty" "thirty" "forty" "fifty" "sixty" "seventy" "eighty" "ninety" ] -> var tens
+
+: at ( i [] -- e ) swap @ ;
+: div ( n -- n ) / floor ;
+: /mod ( n n -- n n ) 2dup % -rot div ;
+
+: convert ( n -- str ) recursive
+  dup 20 <= if 1-20 at exit then
+  dup 100 < if
+    10 /mod tens at
+    over 0 != if swap convert "-" .. .. else nip then
+    exit
+  then
+  dup 1000 < if
+    100 /mod 1-20 at
+    over 0 != if
+      swap convert " hundred and " .. ..
+    else
+      nip " hundred" ..
+    then
+  else
+    drop "one thousand"
+  then ;
+
+: problem17 ( -- n ) 0 1001 1 do i convert strip # + loop ;
+
+21124 problem17 =assert
