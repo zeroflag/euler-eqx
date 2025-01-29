@@ -1,0 +1,67 @@
+\ https://projecteuler.net/problem=19
+
+var month
+var year
+var calendar
+
+: end? ( -- bool ) year 2000 = month 12 = and ;
+
+: leap-year? ( -- bool )
+  year 4 % 0 =
+    year 100 % 0 !=
+    year 400 % 0  = or
+  and ;
+
+: days-of-month ( -- n )
+  month case
+    1  of 31 endof
+    2  of
+      leap-year? if 29 else 28 end
+    endof
+    3  of 31 endof
+    4  of 30 endof
+    5  of 31 endof
+    6  of 30 endof
+    7  of 31 endof
+    8  of 31 endof
+    9  of 30 endof
+    10 of 31 endof
+    11 of 30 endof
+    12 of 31 endof
+    drop
+  endcase ;
+
+: reset
+  1 -> month
+  1901 -> year
+  [] -> calendar ;
+
+: gen-calendar
+  reset
+  begin
+    end? not
+  while
+    calendar days-of-month append
+    month 1 + -> month
+    month 12 > if
+      1 -> month
+      1 year + -> year
+    then
+  repeat ;
+
+: count-1st-sundays ( -- n )
+  1 -> var count
+  0 -> var remainder
+  calendar ipairs: _ days
+    days remainder + 7 % -> remainder
+    remainder 0 = if
+      1 count + -> count
+    then
+  end
+  count ;
+
+: problem19 ( -- n )
+  gen-calendar
+  count-1st-sundays ;
+
+171 problem19 =assert
