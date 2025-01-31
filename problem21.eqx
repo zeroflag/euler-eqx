@@ -1,0 +1,37 @@
+\ https://projecteuler.net/problem=21
+
+alias: floor #( math.floor 1 1 )
+
+var result
+
+: sumdivs ( n -- n )
+  1 ( sum )
+  over ( n ) 2 / floor 1 + 2 do
+    over i % 0 = if
+      i +
+    then
+  loop
+  nip ;
+
+: find-all ( -- )
+  1 9999 to: a
+    result a @ not if
+      a sumdivs -> var b
+      a b != if
+        a b sumdivs = if
+          result a true !
+          result b true !
+        then
+      then
+    then
+  end ;
+
+: problem21 ( -- n )
+  {} -> result
+  find-all
+  0 ( sum )
+  result pairs: k _
+    k +
+  end ;
+
+31626 problem21 =assert
