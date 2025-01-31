@@ -1,0 +1,48 @@
+\ https://projecteuler.net/problem=22
+
+alias: file_name "0022_names.txt"
+alias: sub #( string.sub 3 )
+alias: ord #( string.byte 1 )
+alias: fopen #( io.open 2 1 )
+alias: err #( error 1 )
+alias: gmatch #( string.gmatch 2 )
+alias: gsub #( string.gsub 3 )
+alias: sort #( table.sort 1 0 )
+
+: at ( str i -- chr ) dup sub ;
+: chr>score ( str i -- n ) at ord 64 - ;
+
+: score ( str -- n )
+  0 ( sum )
+  over # 1 + 1 do
+    over i chr>score +
+  loop
+  nip ;
+
+: strip ( s -- s ) "\"" "" gsub drop ;
+
+: read ( -- s )
+  file_name "r" fopen -> var file
+  file not if
+    "cannot open: " file_name .. err
+  then
+  file:read -> var content
+  file:close
+  drop
+  content ;
+
+: parse ( -- )
+  []
+  read "[^,]+" gmatch iter: name
+    dup name strip append
+  end ;
+
+: problem22 ( -- n )
+  parse
+  dup sort
+  0 ( result )
+  swap ipairs: i n
+   i n score * +
+  end ;
+
+871198282 problem22 =assert
